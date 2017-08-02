@@ -22,7 +22,7 @@ namespace ECPU.UI
         public StackPanel allWindow;
        
         public CPWindow(string _windowTitle)
-        {
+        {//
             windowTitle = _windowTitle;
             Closing += closing;
             if (!INIT.DEFAULT_VISUAL_STYLE)
