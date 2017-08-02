@@ -119,8 +119,17 @@ namespace ECPU
                         case "LO_MANAGER":
                             new LO_MANAGER().ShowDialog();                        
                             break;
-                        case "UPDATER":                                                          
-                            new UPDATER().ShowDialog();
+                        case "UPDATER":
+                            try
+                            {
+                                new UPDATER().ShowDialog();
+                            }
+                               catch (gameBuildInvalidVersionForUpdateException ex)
+                            {
+                                MessageBox.Show(ex.Message);
+                                return;
+                            }
+                           
                             
                             break;
                         default:

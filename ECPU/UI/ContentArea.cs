@@ -215,7 +215,7 @@ namespace ECPU.UI
                           item = new ENB_PRESET(
                                 Convert.ToInt32(row[4]),
                                 row[0].ToString(),
-                                row[1].ToString(),
+                               INIT.ENB_DIR + row[1].ToString(),
                                 row[2].ToString(),
                                 row[5].ToString()
                                 );

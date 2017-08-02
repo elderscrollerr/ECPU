@@ -201,7 +201,7 @@ namespace ECPU
             {
                 //размонтируем
             }
-            if (!MusicPlayer.isPlaying())
+            if (!MusicPlayer.isPlaying() && MusicPlayer.STOPPED_MANUALLY)
             {
                 MusicPlayer.Play();
             }

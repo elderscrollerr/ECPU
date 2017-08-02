@@ -60,8 +60,11 @@ namespace ECPU
             }
             catch (NoInternetConnectionException)
             {
-
+                return;
             }
+         
+            
+
 
         }
 
