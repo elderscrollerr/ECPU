@@ -22,7 +22,7 @@ namespace ECPU.LoadOrderUtility
         private StackPanel controls;
         private static List<PluginInList> LO;
       //  private static List<PluginInList> LO;
-      public static int ACTIVE_PLUGINS_LIMIT = 255;
+      public static int ACTIVE_PLUGINS_LIMIT = 10;
         public static int currentActivePlugins;
         public static PluginInList currentShifted;
 
@@ -208,29 +208,7 @@ namespace ECPU.LoadOrderUtility
                 {
                     FileManager.remove(INIT.PLUGINS_TXT_PATH);
                     FileManager.copyFiles(INIT.getpath("plugins_txt_backup"), INIT.PLUGINS_TXT_PATH);
-                    // MessageBox.Show("Сброс произведен успешно");
                    
-                    if (!INIT.DEFAULT_VISUAL_STYLE)
-                    {
-                        currentShifted.view.Background = new ImageBrush(STYLE.BG);
-                        currentShifted.pluginname.Foreground = STYLE.MAIN_MENU_BG_CONTRAST_COLOR;
-
-
-
-                    //    currentShifted.view.ClearValue(StackPanel.BackgroundProperty);
-                        //  LoadOrderManager.currentShifted.pluginname.ClearValue(Label.ForegroundProperty);
-                   //     LO_MANAGER.currentShifted.pluginname.Foreground = STYLE.MAIN_MENU_FOREGROUND;
-
-                    }
-                    else
-                    {
-                        currentShifted.view.Background = Brushes.Black;
-                        currentShifted.pluginname.Foreground = Brushes.White;
-                       // currentShifted.view.ClearValue(StackPanel.BackgroundProperty);
-                        //  LoadOrderManager.currentShifted.pluginname.ClearValue(Label.ForegroundProperty);
-                       // currentShifted.pluginname.Foreground = Brushes.Black;
-                    }
-                    currentShifted = null;
                 }
                 catch
                 {
