@@ -30,7 +30,11 @@ namespace ECPU.UI
                 Icon = BitmapFrame.Create(new Uri(STYLE.ICON_IMAGE_PATH, UriKind.RelativeOrAbsolute));
                 Background = new ImageBrush(STYLE.BG);
                 BorderBrush = STYLE.MAIN_MENU_BORDER_COLOR;
-                MusicPlayer.Play();
+                if (!MusicPlayer.STOPPED_MANUALLY)
+                {
+                    MusicPlayer.Play();
+                }
+             
             }
             else
             {

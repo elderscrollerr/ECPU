@@ -12,7 +12,7 @@ public static class MusicPlayer
        public static bool MUSIC_IS_STOPPED = true;
 
        private static System.Media.SoundPlayer player;
-     
+        public static bool STOPPED_MANUALLY;
 
         public static void Play()
         {

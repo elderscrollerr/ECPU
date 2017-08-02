@@ -86,7 +86,7 @@ namespace ECPU.UI
                     if (MusicPlayer.isPlaying())
                     {
                         MusicPlayer.Stop();
-
+                        MusicPlayer.STOPPED_MANUALLY = true;
                     }
                     else
                     {

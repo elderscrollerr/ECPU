@@ -22,8 +22,8 @@ namespace ECPU.LoadOrderUtility
         private StackPanel controls;
         private static List<PluginInList> LO;
       //  private static List<PluginInList> LO;
-
-
+      public static int ACTIVE_PLUGINS_LIMIT = 10;
+        public static int currentActivePlugins;
         public static PluginInList currentShifted;
 
         public LO_MANAGER() : base(null)
@@ -31,14 +31,18 @@ namespace ECPU.LoadOrderUtility
           
         }
 
+        public Grid getcontent()
+        {
+            return getContent();
+        }
         protected override Grid getContent()
         {
-            //   LO_MANAGER lom = new LO_MANAGER();
+            currentActivePlugins = INIT.MASTER_FILES_ESM.Length;
 
             buildLO();
             getList();
             getControls();
-
+           
 
             StackPanel view = new StackPanel();
             view.Orientation = Orientation.Horizontal;

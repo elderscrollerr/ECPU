@@ -38,13 +38,18 @@ namespace ECPU.LoadOrderUtility
 
         public void activate()
         {
-            isActive = true;
+            if (LO_MANAGER.currentActivePlugins<LO_MANAGER.ACTIVE_PLUGINS_LIMIT)
+            {
+                isActive = true;
+                LO_MANAGER.currentActivePlugins = LO_MANAGER.currentActivePlugins + 1;
+            }
+           
         
         }
         public void deactivate()
         {
             isActive = false;
-           
+            LO_MANAGER.currentActivePlugins = LO_MANAGER.currentActivePlugins - 1;
         }
         public string getTitle()
         {
@@ -141,7 +146,7 @@ namespace ECPU.LoadOrderUtility
             LO_MANAGER.writeLOInFile();
            CPWindow window = (CPWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
             window.allWindow.Children.RemoveAt(1);
-            window.allWindow.Children.Add(new ContentArea("LO_MANAGER"));
+            window.allWindow.Children.Add(new LO_MANAGER().getcontent());
         }
 
         private void focusOnPluginLine(object sender, RoutedEventArgs e)
