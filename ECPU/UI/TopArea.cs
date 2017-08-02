@@ -25,9 +25,10 @@ namespace ECPU.UI
   public  class TopArea : Grid
     {
         private enum TOP_PANEL_BUTTONS { CLOSE_BUTTON, MUSIC_BUTTON, LOG_BUTTON }
-
-        public TopArea()
+        private string windowTitle;
+        public TopArea(string _windowTitle)
         {
+            windowTitle = _windowTitle;
             HorizontalAlignment = HorizontalAlignment.Left;
             if (!INIT.DEFAULT_VISUAL_STYLE)
             {
@@ -75,8 +76,17 @@ namespace ECPU.UI
             char senderButton = (char)(sender as TextBlock).Tag;
             if (!Convert.ToBoolean(senderButton.CompareTo(getButton(TOP_PANEL_BUTTONS.CLOSE_BUTTON))))
             {
-                System.Windows.Application.Current.Shutdown();
-             
+                if (windowTitle!=null && windowTitle.Equals("WINDOW_MAINMENU"))
+                {
+                    System.Windows.Application.Current.Shutdown();
+
+                    Logger.addLine(true, "Завершение приложения");
+                }else
+                {
+                    CPWindow window = (CPWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+                    window.Close();
+                }
+               
                 
             }
             else

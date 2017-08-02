@@ -41,7 +41,7 @@ namespace ECPU.UI
                 Background = Brushes.Gray;
             }
             allWindow = new StackPanel();
-            top = new TopArea();
+            top = new TopArea(windowTitle);
             content = getContent();
 
             BorderThickness = new Thickness(2);
