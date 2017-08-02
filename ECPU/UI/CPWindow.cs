@@ -79,11 +79,7 @@ namespace ECPU.UI
                 }
                 Logger.addLine(true, "Завершение приложения");
             }
-
-            if (File.Exists(INIT.RES_DIR + "TEMP.db"))
-            {
-                FileManager.remove(INIT.RES_DIR + "TEMP.db");
-            }
+            
 
         }
 

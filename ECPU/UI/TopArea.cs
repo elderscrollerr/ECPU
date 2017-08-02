@@ -75,8 +75,8 @@ namespace ECPU.UI
             char senderButton = (char)(sender as TextBlock).Tag;
             if (!Convert.ToBoolean(senderButton.CompareTo(getButton(TOP_PANEL_BUTTONS.CLOSE_BUTTON))))
             {
-                Window w = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-                w.Close();
+                System.Windows.Application.Current.Shutdown();
+             
                 
             }
             else
