@@ -18,7 +18,7 @@ namespace ECPU.LoadOrderUtility
         private string filename;
         private bool isActive;
         public Label pluginname;
-        private DockPanel view;
+        public DockPanel view;
       private bool isShifted;
      //   public static PluginInList currentShifted;
       

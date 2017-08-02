@@ -22,7 +22,7 @@ namespace ECPU.LoadOrderUtility
         private StackPanel controls;
         private static List<PluginInList> LO;
       //  private static List<PluginInList> LO;
-      public static int ACTIVE_PLUGINS_LIMIT = 10;
+      public static int ACTIVE_PLUGINS_LIMIT = 255;
         public static int currentActivePlugins;
         public static PluginInList currentShifted;
 
@@ -201,56 +201,89 @@ namespace ECPU.LoadOrderUtility
         public static void changeLO(CONTROLS_ACTIONS action)
         {
 
-
-
-            if (currentShifted != null)
+            if (action.Equals(CONTROLS_ACTIONS.RESET))
             {
 
-                PluginInList current = LO.Find(o => o.getTitle().Equals(currentShifted.getTitle()));
-                int pos = LO.IndexOf(current);
-
-                if (action.Equals(CONTROLS_ACTIONS.UP) && (pos == INIT.MASTER_FILES_ESM.Length))
+                try
                 {
-                    return;
+                    FileManager.remove(INIT.PLUGINS_TXT_PATH);
+                    FileManager.copyFiles(INIT.getpath("plugins_txt_backup"), INIT.PLUGINS_TXT_PATH);
+                    // MessageBox.Show("Сброс произведен успешно");
+                   
+                    if (!INIT.DEFAULT_VISUAL_STYLE)
+                    {
+                        currentShifted.view.Background = new ImageBrush(STYLE.BG);
+                        currentShifted.pluginname.Foreground = STYLE.MAIN_MENU_BG_CONTRAST_COLOR;
+
+
+
+                    //    currentShifted.view.ClearValue(StackPanel.BackgroundProperty);
+                        //  LoadOrderManager.currentShifted.pluginname.ClearValue(Label.ForegroundProperty);
+                   //     LO_MANAGER.currentShifted.pluginname.Foreground = STYLE.MAIN_MENU_FOREGROUND;
+
+                    }
+                    else
+                    {
+                        currentShifted.view.Background = Brushes.Black;
+                        currentShifted.pluginname.Foreground = Brushes.White;
+                       // currentShifted.view.ClearValue(StackPanel.BackgroundProperty);
+                        //  LoadOrderManager.currentShifted.pluginname.ClearValue(Label.ForegroundProperty);
+                       // currentShifted.pluginname.Foreground = Brushes.Black;
+                    }
+                    currentShifted = null;
+                }
+                catch
+                {
+                    MessageBox.Show("Не удалось провести сброс");
                 }
 
-                PluginInList tmp;
 
-                switch (action)
-                {
-                    case CONTROLS_ACTIONS.UP:
-
-                        tmp = LO[pos];
-
-                        LO[pos] = LO[pos - 1];
-
-                        LO[pos - 1] = tmp;
-
-                        break;
-                    case CONTROLS_ACTIONS.DOWN:
-                        tmp = LO[pos];
-                        LO[pos] = LO[pos + 1];
-                        LO[pos + 1] = tmp;
-                        break;
-
-                    default:
-                        break;
-                }
-                writeLOInFile();
-
-            }
-            else
+            }else
             {
-                if (action.Equals(CONTROLS_ACTIONS.RESET))
+                if (currentShifted != null)
                 {
 
+                    PluginInList current = LO.Find(o => o.getTitle().Equals(currentShifted.getTitle()));
+                    int pos = LO.IndexOf(current);
 
-                    FileManager.remove(INIT.getpath("plugins_txt"));
-                    FileManager.copyFiles(INIT.getpath("plugins_txt_backup"), INIT.getpath("plugins_txt"));
+                    if (action.Equals(CONTROLS_ACTIONS.UP) && (pos == INIT.MASTER_FILES_ESM.Length))
+                    {
+                        return;
+                    }
+
+                    PluginInList tmp;
+
+                    switch (action)
+                    {
+                        case CONTROLS_ACTIONS.UP:
+
+                            tmp = LO[pos];
+
+                            LO[pos] = LO[pos - 1];
+
+                            LO[pos - 1] = tmp;
+
+                            break;
+                        case CONTROLS_ACTIONS.DOWN:
+                            tmp = LO[pos];
+                            LO[pos] = LO[pos + 1];
+                            LO[pos + 1] = tmp;
+                            break;
+
+                        default:
+                            break;
+                    }
+                    writeLOInFile();
 
                 }
             }
 
+
+
+
+
+          
+           
         }
 
 
@@ -383,10 +416,10 @@ namespace ECPU.LoadOrderUtility
         private void act(object sender, MouseButtonEventArgs e)
         {
             changeLO((CONTROLS_ACTIONS)(sender as TextBlock).Tag);
-            getContent();
+            
             CPWindow window = (CPWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
             window.allWindow.Children.RemoveAt(1);
-            window.allWindow.Children.Add(getContent());
+            window.allWindow.Children.Add(new LO_MANAGER().getContent());
         
         }
 
