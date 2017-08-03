@@ -6,11 +6,3 @@ D:\TES_DEV\ECPU\ECPU\ECPU\bin\Debug\ECPU.exe
 D:\TES_DEV\ECPU\ECPU\ECPU\bin\Debug\ECPU.pdb
 D:\TES_DEV\ECPU\ECPU\ECPU\obj\Debug\ECPU.exe
 D:\TES_DEV\ECPU\ECPU\ECPU\obj\Debug\ECPU.pdb
-D:\TES_DEV\GitHub\ECPU\ECPU\bin\Debug\ECPU.exe
-D:\TES_DEV\GitHub\ECPU\ECPU\bin\Debug\ECPU.pdb
-D:\TES_DEV\GitHub\ECPU\ECPU\obj\Debug\ECPU.csprojResolveAssemblyReference.cache
-D:\TES_DEV\GitHub\ECPU\ECPU\obj\Debug\ECPU.g.resources
-D:\TES_DEV\GitHub\ECPU\ECPU\obj\Debug\ECPU.Properties.Resources.resources
-D:\TES_DEV\GitHub\ECPU\ECPU\obj\Debug\ECPU.csproj.GenerateResource.Cache
-D:\TES_DEV\GitHub\ECPU\ECPU\obj\Debug\ECPU.exe
-D:\TES_DEV\GitHub\ECPU\ECPU\obj\Debug\ECPU.pdb
