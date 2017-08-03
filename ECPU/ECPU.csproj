@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="AppRunner.cs" />
     <Compile Include="CP_UTILS\ENB_MANAGER\ENB_MANAGER.cs" />
+    <Compile Include="CP_UTILS\ENB_MANAGER\ENB_PRESET.cs" />
     <Compile Include="Downloader.cs" />
     <Compile Include="INIT.cs" />
     <Compile Include="ExplorerHandler.cs" />
@@ -89,7 +90,7 @@
     <Compile Include="UI\WINDOW_ITEMS\BSA_Setting.cs" />
     <Compile Include="UI\WINDOW_ITEMS\CP_ActionableItem.cs" />
     <Compile Include="CP_UTILS\UPDATER\UPDATE_ITEM.cs" />
-    <Compile Include="UI\WINDOW_ITEMS\ENB_PRESET.cs" />
+    <Compile Include="UI\WINDOW_ITEMS\ENB_PRESET_ITEM.cs" />
     <Compile Include="UI\WINDOW_ITEMS\TextItem.cs" />
     <Compile Include="UI\WINDOW_ITEMS\MainMenuButton.cs" />
     <Compile Include="MusicPlayer.cs" />

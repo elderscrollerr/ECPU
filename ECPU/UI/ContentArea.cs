@@ -17,7 +17,7 @@ namespace ECPU.UI
    public class ContentArea : Grid
     {
 
-        private string windowtitle;
+       private string windowtitle;
         private string tableBD;
 
         private int itemsInWidth;
@@ -30,10 +30,7 @@ namespace ECPU.UI
         public bool autoAllSettings;
         private List<CPWindowItem> items;
 
-
-
-       
-
+        
 
         public ContentArea(string _windowtitle)
         {
@@ -49,27 +46,19 @@ namespace ECPU.UI
                     autoAllSettings = true;
 
                 }
-
-
-                createItems();
-                build();
-                if (!autoAllSettings)
-                {
-                    Width = (itemWidth + itemSpace) * itemsInWidth;
-                    Height = (itemHeight + itemSpace) * itemsInHeight;
-                }
-                
+            createItems();
+            build();
+            if (!autoAllSettings)
+            {
+                Width = (itemWidth + itemSpace) * itemsInWidth;
+                Height = (itemHeight + itemSpace) * itemsInHeight;
+            }
             Margin = new Thickness(15);
-
         }
 
-
-
-        public void rebuild()
-        {
-
+        public ContentArea()
+        {            
         }
-
 
         private void createItems()
         {
@@ -212,7 +201,7 @@ namespace ECPU.UI
                         items.Add(item);
                         break;
                     case "ENB_OPTION":
-                          item = new ENB_PRESET(
+                          item = new ENB_PRESET_ITEM(
                                 Convert.ToInt32(row[4]),
                                 row[0].ToString(),
                                INIT.ENB_DIR + row[1].ToString(),

@@ -18,145 +18,118 @@ namespace ECPU
 {
     public class ENB_MANAGER : CPWindow
     {
-        //   public enum CONTROLS_ACTIONS { UP, DOWN, RESET };
-        //  private StackPanel plugins;
-        //   private StackPanel controls;
+       
 
-        //  private static List<PluginInList> LO;
-
-        public static List<string> enbcore;
-
-        private string currentpreset;
-        private List<CPWindowItem> presets;
-        public static bool callFromENBMANAGER;
+        private static List<string> enbcore;
+        private static ENB_PRESET activePreset;
+        // private string currentpreset;
+        //  private  presets;
 
         public ENB_MANAGER() : base(null)
         {
-           
-
-           
-
-           
-
-
+            restoreEnbCoreFiles();
         }
 
-        protected override Grid getContent()
-        {
-            enbcore = new List<string>();
-            enbcore.Add("d3d11.dll");
-            enbcore.Add("d3dcompiler_46e.dll");
-            enbcore.Add("enblocal.ini");
 
+        public static void restoreEnbCoreFiles()
+        {
+          
+            if (enbcore ==null || enbcore.Count <= 0)
+            {
+                enbcore = new List<string>();
+                enbcore.Add("d3d11.dll");
+                enbcore.Add("d3dcompiler_46e.dll");
+                enbcore.Add("enblocal.ini");
+            }
+         
             foreach (string file in enbcore)
             {
                 if (!File.Exists(INIT.GAME_ROOT + file))
                 {
-                    FileManager.copyFiles(INIT.RES_DIR + @"ENB core\file", INIT.GAME_ROOT);
+                    FileManager.copyFiles(INIT.RES_DIR + @"ENB core\" + file, INIT.GAME_ROOT + file);
                 }
             }
+        }
 
-            callFromENBMANAGER = true;
+        protected override Grid buildContent()
+        {
             string[] presetsFolders = Directory.GetDirectories(INIT.ENB_DIR);
-            CPWindowItem item;
-            presets = new List<CPWindowItem>();
-            for (int numberOfPreset = 0; numberOfPreset < presetsFolders.Length; numberOfPreset++)
+
+            List<ENB_PRESET> presets = new List<ENB_PRESET>();
+            ENB_PRESET noPreset = new ENB_PRESET();
+            if (noPreset.getActivity())
             {
-                if (Directory.GetFileSystemEntries(presetsFolders[numberOfPreset]).Length != 0)
+                activePreset = noPreset;
+            }
+            noPreset.Checked += new RoutedEventHandler(act);
+            presets.Add(noPreset);
+
+            foreach (string presetDir in presetsFolders)
+            {
+                if (Directory.GetFileSystemEntries(presetDir).Length != 0)
                 {
-                    item = new ENB_PRESET(numberOfPreset, Path.GetFileName(presetsFolders[numberOfPreset]), presetsFolders[numberOfPreset], null, null);
-                    presets.Add(item);
+                    ENB_PRESET preset = new ENB_PRESET(presetDir);
+                    preset.Checked += new RoutedEventHandler(act);
+                    if (preset.getActivity())
+                    {
+                        activePreset = preset;
+                    }
+                    presets.Add(preset);
                 }
-
-
             }
 
 
-            if (string.IsNullOrWhiteSpace(INIT.CURRENT_ENB_OPTION))
+            Grid enbGrid = new Grid();         
+            enbGrid.ColumnDefinitions.Add(new ColumnDefinition());
+
+            if (!INIT.DEFAULT_VISUAL_STYLE)
             {
-                currentpreset = "";
+                enbGrid.Background = new ImageBrush(STYLE.BUTTON);
             }
             else
             {
-                currentpreset = INIT.CURRENT_ENB_OPTION;
-            }
-
-
-
-
-            Grid enbGrid = new Grid();
-            StackPanel view = new StackPanel();
-            view.Width = 200;
-            foreach (CPWindowItem preset in presets)
-            {
-                enbGrid.RowDefinitions.Add(new RowDefinition());
-            }
-
-            enbGrid.ColumnDefinitions.Add(new ColumnDefinition());
-
+                enbGrid.Background = Brushes.WhiteSmoke;
+            }           
+           
+            enbGrid.Margin = new Thickness(15);
 
             for (int i = 0; i < presets.Count; i++)
             {
-
-                presets[i].setFontSize(14.0);
-
-                StackPanel itemOnForm = presets[i].getView();
-                if (!INIT.DEFAULT_VISUAL_STYLE)
-                {
-               //     itemOnForm.Background = new ImageBrush(STYLE.BUTTON);
-                //    itemOnForm.Width = CP_RADIO_BUTTONS_LIST_ELEMENT.maxWidth;
-                }
-                else
-                {
-                    itemOnForm.Background = Brushes.WhiteSmoke;
-                }
-                itemOnForm = presets[i].getView();
-
-                enbGrid.Children.Add(itemOnForm);
-            enbGrid.Background = new ImageBrush(STYLE.BUTTON);
-                enbGrid.Margin = new Thickness(15);
-                Grid.SetRow(itemOnForm, i);
-                Grid.SetColumn(itemOnForm, 0);
+               
+                enbGrid.RowDefinitions.Add(new RowDefinition());
+                StackPanel sp = new StackPanel();
+                
+                sp.Children.Add(presets[i]);
+                enbGrid.Children.Add(sp);
+                Grid.SetRow(sp, i);
+                Grid.SetColumn(sp, 0);
             }
-           // enbGrid.ShowGridLines = true;
+            if (activePreset==null)
+            {
+                noPreset.enable();
+                activePreset = noPreset;
+            }
             return enbGrid;
 
         }
-    
 
-    
-
-
-     
-
-
-
-
-     
-
-     
-
-        private void act(object sender, MouseButtonEventArgs e)
+        public static void act(object sender, RoutedEventArgs e)
         {
-         //   changeLO((CONTROLS_ACTIONS)(sender as TextBlock).Tag);
-            getContent();
-            CPWindow window = (CPWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-            window.allWindow.Children.RemoveAt(1);
-            window.allWindow.Children.Add(getContent());
-        
-        }
+            if (activePreset!=null)
+            {
+              //  MessageBox.Show(activePreset.Content.ToString());
+                activePreset.disable();
+               
+           //   MessageBox.Show((sender as ENB_PRESET).Content.ToString());
+                (sender as ENB_PRESET).enable();
+                activePreset = (sender as ENB_PRESET);
+                //  (sender as ENB_PRESET).setActive();
+            }
 
-    
-        /*
-        public override StackPanel getView()
-        {
-            view = new StackPanel();
-            view.Orientation = Orientation.Horizontal;
-            view.Children.Add(plugins);
-            view.Children.Add(controls);
-            return view;
-        }
 
-      */
+          
+
+
+        }
     }
 }

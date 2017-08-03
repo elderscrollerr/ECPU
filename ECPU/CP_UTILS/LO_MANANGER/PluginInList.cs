@@ -145,8 +145,8 @@ namespace ECPU.LoadOrderUtility
             }
             LO_MANAGER.writeLOInFile();
            CPWindow window = (CPWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-            window.allWindow.Children.RemoveAt(1);
-            window.allWindow.Children.Add(new LO_MANAGER().getcontent());
+           // window.allWindow.Children.RemoveAt(1);
+        //    window.allWindow.Children.Add(new LO_MANAGER().getcontent());
         }
 
         private void focusOnPluginLine(object sender, RoutedEventArgs e)

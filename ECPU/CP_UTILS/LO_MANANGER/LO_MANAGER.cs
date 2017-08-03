@@ -18,40 +18,33 @@ namespace ECPU.LoadOrderUtility
     public class LO_MANAGER : CPWindow
     {
         public enum CONTROLS_ACTIONS { UP, DOWN, RESET };
-        private StackPanel plugins;
-        private StackPanel controls;
+   
         private static List<PluginInList> LO;
-      //  private static List<PluginInList> LO;
-      public static int ACTIVE_PLUGINS_LIMIT = 10;
+      public static int ACTIVE_PLUGINS_LIMIT = 255;
         public static int currentActivePlugins;
         public static PluginInList currentShifted;
 
-        public LO_MANAGER() : base(null)
-        {
-          
+        public LO_MANAGER()
+        {                     
         }
-
-        public Grid getcontent()
-        {
-            return getContent();
-        }
-        protected override Grid getContent()
+       
+        protected override Grid buildContent()
         {
             currentActivePlugins = INIT.MASTER_FILES_ESM.Length;
-
             buildLO();
-            getList();
-            getControls();
-           
-
-            StackPanel view = new StackPanel();
-            view.Orientation = Orientation.Horizontal;
-            view.Children.Add(plugins);
-            view.Children.Add(controls);
-            Grid content = new Grid();
-            content.Children.Add(view);
-            Grid.SetRow(view, 0);
-            Grid.SetColumn(view, 0);
+            StackPanel list = getList();
+            StackPanel controls = getControls();
+            Grid content = new ContentArea();
+            content.RowDefinitions.Add(new RowDefinition());
+            content.ColumnDefinitions.Add(new ColumnDefinition());
+            content.ColumnDefinitions.Add(new ColumnDefinition());
+            content.Children.Add(list);
+            Grid.SetRow(list, 0);
+            Grid.SetColumn(list, 0);
+           content.Children.Add(controls);
+           Grid.SetRow(controls, 0);
+           Grid.SetColumn(controls, 1);
+          
             return content;
           
         }
@@ -255,21 +248,13 @@ namespace ECPU.LoadOrderUtility
 
                 }
             }
-
-
-
-
-
-          
            
         }
 
 
-
-
-        private void getList()
+        private StackPanel getList()
         {
-            plugins = new StackPanel();
+            StackPanel plugins = new StackPanel();
 
             Grid grid = new Grid();       
             ColumnDefinition c1 = new ColumnDefinition();   
@@ -299,19 +284,16 @@ namespace ECPU.LoadOrderUtility
                 plugins.Background = Brushes.White;
             }
 
-            
-
-
-
 
             plugins.Margin = new Thickness(10);       
             plugins.Children.Add(grid);
+            return plugins;
 
         }
 
-        private void getControls()
+        private StackPanel getControls()
         {
-            controls = new StackPanel();
+            StackPanel controls = new StackPanel();
             controls.Orientation = Orientation.Horizontal;
             controls.VerticalAlignment = VerticalAlignment.Top;
 
@@ -388,17 +370,21 @@ namespace ECPU.LoadOrderUtility
             grid.Children.Add(down);
             grid.Children.Add(reset);
             controls.Children.Add(grid);
+
+            return controls;
            
         }
 
         private void act(object sender, MouseButtonEventArgs e)
         {
             changeLO((CONTROLS_ACTIONS)(sender as TextBlock).Tag);
-            
-            CPWindow window = (CPWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-            window.allWindow.Children.RemoveAt(1);
-            window.allWindow.Children.Add(new LO_MANAGER().getContent());
-        
+
+            //   CPWindow window = (CPWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+            allWindow.Children.RemoveAt(1);
+            allWindow.Children.Add(buildContent());
+           // top = new TopArea();
+          //  content = new LO_MANAGER().buildContent();
+
         }
 
     

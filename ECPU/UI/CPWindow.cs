@@ -17,14 +17,79 @@ namespace ECPU.UI
   public class CPWindow : System.Windows.Window
     {
         public string windowTitle;
-        private TopArea top;
-        public Grid content;
-        public StackPanel allWindow;
-       
+        protected TopArea top;
+        protected Grid content;
+        protected StackPanel allWindow;
+
+
         public CPWindow(string _windowTitle)
-        {//
+        {
             windowTitle = _windowTitle;
             Closing += closing;
+            setVisualStyle();
+
+
+            top = new TopArea();
+            content = buildContent();
+
+
+            setContent();
+
+
+        }
+
+        public CPWindow()
+        {
+            Closing += closing;
+            setVisualStyle();
+
+
+            top = new TopArea();
+            content = buildContent();
+            
+
+            setContent();
+
+        }
+
+        protected virtual Grid buildContent()
+        {
+            if (!string.IsNullOrEmpty(windowTitle))
+            {
+               return new ContentArea(windowTitle);
+            }else
+            {
+                return null;
+            }
+           
+        }
+
+
+
+        private void setContent()
+        {
+            BorderThickness = new Thickness(2);
+            Width = content.Width;
+            Height = content.Height + top.Height;
+
+
+
+            allWindow = new StackPanel();
+            allWindow.Children.Add(top);
+            allWindow.Children.Add(content);
+            Content = allWindow;
+
+            SizeToContent = SizeToContent.WidthAndHeight;
+            ResizeMode = ResizeMode.NoResize;
+            MouseDown += new System.Windows.Input.MouseButtonEventHandler(Window_MouseDown);
+            WindowStyle = WindowStyle.None;
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            LocationChanged += ParentLocationChanged;
+        }
+
+
+        private void setVisualStyle()
+        {
             if (!INIT.DEFAULT_VISUAL_STYLE)
             {
                 Icon = BitmapFrame.Create(new Uri(STYLE.ICON_IMAGE_PATH, UriKind.RelativeOrAbsolute));
@@ -34,38 +99,15 @@ namespace ECPU.UI
                 {
                     MusicPlayer.Play();
                 }
-             
+
             }
             else
             {
                 Background = Brushes.Gray;
             }
-            allWindow = new StackPanel();
-            top = new TopArea(windowTitle);
-            content = getContent();
-
-            BorderThickness = new Thickness(2);
-            Width = content.Width;
-            Height = content.Height + top.Height;
-            allWindow.Children.Add(top);
-            allWindow.Children.Add(content);
-            Content = allWindow;
-            SizeToContent = SizeToContent.WidthAndHeight;
-            ResizeMode = ResizeMode.NoResize;
-            MouseDown += new System.Windows.Input.MouseButtonEventHandler(Window_MouseDown);
-            WindowStyle = WindowStyle.None;
-            WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            //   LocationChanged += ParentLocationChanged;
         }
 
-
-
-      
-
-        protected virtual Grid getContent()
-        {
-            return new ContentArea(windowTitle);
-        }
+     
 
 
 
@@ -90,7 +132,6 @@ namespace ECPU.UI
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
             if (e.LeftButton == MouseButtonState.Pressed)
                 this.DragMove();
         }

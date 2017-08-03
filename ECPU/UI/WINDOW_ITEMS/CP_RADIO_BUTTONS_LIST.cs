@@ -23,10 +23,7 @@ namespace ECPU.UI.WINDOW_ITEMS
 
         public CP_RADIO_BUTTONS_LIST_ELEMENT(int position, string name, string path, string _link, string desc) : base(name, path, desc, position)
         {
-            if (!ENB_MANAGER.callFromENBMANAGER)
-            {
                 link = _link;
-            }
         }
 
    
@@ -37,46 +34,7 @@ namespace ECPU.UI.WINDOW_ITEMS
         public override StackPanel getView()
         {
             StackPanel view = new StackPanel();
-            if (ENB_MANAGER.callFromENBMANAGER)
-            {
-                maxWidth = 0;
-                view = new StackPanel();
-               // view.Background = STYLE.BUTTON_IMAGE_PATH;
-                rb = new RadioButton();
-                rb.Content = _name;
-
-                if (!INIT.DEFAULT_VISUAL_STYLE)
-                {
-                    rb.Foreground = STYLE.MAIN_MENU_FOREGROUND;
-                }
-                else
-                {
-                    rb.Foreground = Brushes.Black;
-                }
-                if (_name.Equals(INIT.CURRENT_ENB_OPTION) || _name.Equals(INIT.CURRENT_SHADER_OPTION))
-                {
-                    rb.IsChecked = true;
-                }
-
-                rb.Checked += new RoutedEventHandler(act);
-                rb.Margin = new Thickness(10, 10, 10, 10);
-
-               // view.Background = new ImageBrush(STYLE.BUTTON);
-                view.Children.Add(rb);
-
-                if (_name.Length * 10> maxWidth)
-                {
-                    maxWidth = _name.Length * 10;
-                }
-              
-
-             
-               view.HorizontalAlignment = HorizontalAlignment.Left;
-               view.VerticalAlignment = VerticalAlignment.Center;
-                return view;
-            }
-            else
-            {               
+                         
                 Grid rblistgrid = new Grid();
 
                 rblistgrid.ColumnDefinitions.Add(new ColumnDefinition());
@@ -137,20 +95,22 @@ namespace ECPU.UI.WINDOW_ITEMS
                 view.HorizontalAlignment = HorizontalAlignment.Center;
                 view.VerticalAlignment = VerticalAlignment.Center;
                 return view;
-            }
-
-
-
-
-        
         }
 
         private void act(object sender, RoutedEventArgs e)
         {
-            currentpreset.disablePreset();
-            currentpreset = this;
 
-            currentpreset.enablePreset();
+            if (currentpreset!=null)
+            {
+                currentpreset.disablePreset();
+                currentpreset = this;
+
+                currentpreset.enablePreset();
+
+            }
+           
+
+          
 
         }
 
