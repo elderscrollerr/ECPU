@@ -22,7 +22,7 @@ namespace ECPU
         private static bool VirtualCDisMountedNow;   
         private static bool explorerisDisableNow;
         private string argument;
-   
+        private IniManager im;
 
         public AppRunner(string _apppath)
         {
@@ -145,8 +145,15 @@ namespace ECPU
                 VirtualCDisMountedNow = true;
                 //монтируем
             }
-
-            IniManager im = new IniManager(INIT.GAME_ROOT + @"ObivionPerfect.ini");
+            IniManager im;
+            if (File.Exists(INIT.GAME_ROOT + @"ObivionPerfect.ini"))
+            {
+                im = new IniManager(INIT.GAME_ROOT + @"ObivionPerfect.ini");
+            }else
+            {
+                im = null;
+            }
+          
 
 
            if (INIT.CURRENT_GAME.Equals(INIT.GAMES.OP) && Convert.ToBoolean(im.getValueByKey("bDisableExplorer")) && string.IsNullOrEmpty(argument) && Path.GetFileNameWithoutExtension(apppath).Equals("obse_loader") )

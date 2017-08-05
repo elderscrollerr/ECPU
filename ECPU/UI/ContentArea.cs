@@ -234,7 +234,7 @@ namespace ECPU.UI
                            row[1].ToString(),
                            row[2].ToString(),
                            Convert.ToInt32(row[6]),
-                            row[2].ToString(), //"HTTP",
+                            row[3].ToString(), //"HTTP",
                           row[4].ToString());
                         items.Add(item);
                         break;

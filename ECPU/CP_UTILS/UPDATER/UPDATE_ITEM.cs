@@ -100,13 +100,6 @@ namespace ECPU.WINDOW_ITEMS
 
                 checkAsInstalled.ConnectionClose();
                 instButton.MouseDown -= installbtn_Click;
-              //  if (File.Exists(INIT.CTRL_PANEL_DIR + "Update" + _position.ToString() + ".exe"))
-             //   {
-            //        FileManager.remove(INIT.CTRL_PANEL_DIR + "Update" + _position.ToString() + ".exe");
-           //     }
-
-               
-
             }
             catch (downloadArchiveUpdateException)
             {
@@ -168,34 +161,30 @@ namespace ECPU.WINDOW_ITEMS
 
        
 
-      
-
-    
-
         public override StackPanel getView()
         {
             StackPanel view = new StackPanel();
 
-            Grid grid = new Grid();
+          //  Grid grid = new Grid();
 
-            ColumnDefinition c1 = new ColumnDefinition();
-            c1.Width = new GridLength(20);
-            grid.ColumnDefinitions.Add(c1); //номер
+        //    ColumnDefinition c1 = new ColumnDefinition();
+        ////    c1.Width = new GridLength(20);
+        //    grid.ColumnDefinitions.Add(c1); //номер
 
-            ColumnDefinition c2 = new ColumnDefinition();
-            c2.Width = new GridLength(60);
-            grid.ColumnDefinitions.Add(c2); //дата
+         //   ColumnDefinition c2 = new ColumnDefinition();
+        //    c2.Width = new GridLength(60);
+        //    grid.ColumnDefinitions.Add(c2); //дата
 
-            ColumnDefinition c3 = new ColumnDefinition();
-            c3.Width = new GridLength(160);
-            grid.ColumnDefinitions.Add(c3); //название
+        //    ColumnDefinition c3 = new ColumnDefinition();
+        //    c3.Width = new GridLength(160);
+        //    grid.ColumnDefinitions.Add(c3); //название
 
 
-            ColumnDefinition c4 = new ColumnDefinition();
-            c4.Width = new GridLength(110);
-            grid.ColumnDefinitions.Add(c4); //установлено-неустановлено
+        //    ColumnDefinition c4 = new ColumnDefinition();
+       //     c4.Width = new GridLength(110);
+       //     grid.ColumnDefinitions.Add(c4); //установлено-неустановлено
 
-            grid.RowDefinitions.Add(new RowDefinition());
+       //     grid.RowDefinitions.Add(new RowDefinition());
 
            
             lblnumber = new Label();
@@ -212,11 +201,10 @@ namespace ECPU.WINDOW_ITEMS
             {
                 lblnumber.BorderBrush = Brushes.Black;
             }
-           // lblnumber.BorderBrush = STYLE.MAIN_MENU_FOREGROUND;
             lblnumber.BorderThickness = new Thickness(1);
-            grid.Children.Add(lblnumber);
-            Grid.SetRow(lblnumber, 0);
-            Grid.SetColumn(lblnumber, 0);
+          //  grid.Children.Add(lblnumber);
+        //    Grid.SetRow(lblnumber, 0);
+        //    Grid.SetColumn(lblnumber, 0);
 
 
             lbldate = new Label();
@@ -235,9 +223,9 @@ namespace ECPU.WINDOW_ITEMS
             }
            
             lbldate.BorderThickness = new Thickness(1);
-            grid.Children.Add(lbldate);
-            Grid.SetRow(lbldate, 0);
-            Grid.SetColumn(lbldate, 1);
+         //   grid.Children.Add(lbldate);
+         //   Grid.SetRow(lbldate, 0);
+         //   Grid.SetColumn(lbldate, 1);
 
             lblname = new Label();
             lblname.Content = _name;
@@ -255,9 +243,9 @@ namespace ECPU.WINDOW_ITEMS
             }
            
             lblname.BorderThickness = new Thickness(1);
-            grid.Children.Add(lblname);
-            Grid.SetRow(lblname, 0);
-            Grid.SetColumn(lblname, 2);
+         //   grid.Children.Add(lblname);
+        //    Grid.SetRow(lblname, 0);
+       //     Grid.SetColumn(lblname, 2);
 
             instButton = new Label();
             instButton.ToolTip = _description;
@@ -294,17 +282,20 @@ namespace ECPU.WINDOW_ITEMS
                 instButton.MouseDown += installbtn_Click;
 
             }
-            grid.Children.Add(instButton);
-            Grid.SetRow(instButton, 0);
-            Grid.SetColumn(instButton, 3);
+            //   grid.Children.Add(instButton);
+            //    Grid.SetRow(instButton, 0);
+            //    Grid.SetColumn(instButton, 3);
 
-       
+
             //view.Background = new ImageBrush(STYLE.BUTTON);
-        //    view.Margin = new Thickness(20, 20, 20, 20);
+            //    view.Margin = new Thickness(20, 20, 20, 20);
 
-          
-            view.Children.Add(grid);
-          
+            view.Orientation = Orientation.Horizontal;
+            view.Children.Add(lblnumber);
+            view.Children.Add(lbldate);
+            view.Children.Add(lblname);
+            view.Children.Add(instButton);
+
 
             return view;
         }

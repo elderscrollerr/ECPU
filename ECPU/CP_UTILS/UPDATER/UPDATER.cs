@@ -27,8 +27,6 @@ namespace ECPU
 
         public UPDATER() : base("WINDOW_UPDATES")
         {
-
-
             if (INIT.CURRENT_GAME.Equals(INIT.GAMES.ESSE))
                 {
                     UPDATE_DB_DOWNLOAD_LINK = @"https://www.dropbox.com/s/295t2xi7mx3652v/ESSE.db?dl=1";
@@ -62,41 +60,9 @@ namespace ECPU
             {
                 return;
             }
-         
-            
-
 
         }
-
-      //  protected override void getContent()
-      //  {
-
-
-
-
-
-
-
-            //   LO_MANAGER lom = new LO_MANAGER();
-
-        //    buildLO();
-         //   getList();
-        //    getControls();
-
-
-       //     StackPanel view = new StackPanel();
-     //       view.Orientation = Orientation.Horizontal;
-      //      view.Children.Add(plugins);
-      //      view.Children.Add(controls);
-      //      Grid content = new Grid();
-    //        content.Children.Add(view);
-      //      Grid.SetRow(view, 0);
-     //       Grid.SetColumn(view, 0);
-     //       return content;
-
-   //     }
-
-
+  
 
         public void getnewBD()
         {
@@ -108,8 +74,6 @@ namespace ECPU
             {
                 throw new NoInternetConnectionException();
             }
-           
-
             if (File.Exists(TEMP_DB_SQLITE_FILE))
             {
                 SQLiteManager newBD = new SQLiteManager(TEMP_DB_CONNECTION_STRING);
