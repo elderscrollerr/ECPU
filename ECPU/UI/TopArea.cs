@@ -77,8 +77,8 @@ namespace ECPU.UI
             if (!Convert.ToBoolean(senderButton.CompareTo(getButton(TOP_PANEL_BUTTONS.CLOSE_BUTTON))))
             {
                 Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive).Close();
-             //    CPWindow window = (CPWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-             //     window.Close();
+               // CPWindow windowmain = (CPWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+             //   if (windowmain.windowTitle.Equals();)
             }
             else
             {

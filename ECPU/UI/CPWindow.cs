@@ -120,6 +120,7 @@ namespace ECPU.UI
                     FileManager.remove(UPDATER.TEMP_DB_SQLITE_FILE);
                 }
                 Logger.addLine(true, "Завершение приложения");
+                Application.Current.Shutdown();
             }
             
 

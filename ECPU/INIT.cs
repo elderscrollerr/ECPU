@@ -56,10 +56,9 @@ namespace ECPU
 
         public static void initUserBDGame()
         {
-     //  CTRL_PANEL_DIR = @"J:\Games\TES V Skyrim - Special Edition\Control Panel\"; 
+       CTRL_PANEL_DIR = @"J:\Games\TES V Skyrim - Special Edition\Control Panel\"; 
           //  CTRL_PANEL_DIR = @"D:\OblivionPR\Control Panel\"; //корневая директория панели управления - временно
-          // CTRL_PANEL_DIR = @"D:\OblivionPR\Control Panel\" ; //ЭТО У МЕНЯ ТАКОЙ ПУТЬ - ОСТАВЬ
-        //  CTRL_PANEL_DIR = AppDomain.CurrentDomain.BaseDirectory;
+       //  CTRL_PANEL_DIR = AppDomain.CurrentDomain.BaseDirectory;
 
           
 
