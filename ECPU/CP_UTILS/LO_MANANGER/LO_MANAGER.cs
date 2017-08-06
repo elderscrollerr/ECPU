@@ -221,6 +221,12 @@ namespace ECPU.LoadOrderUtility
                     {
                         return;
                     }
+                    if (action.Equals(CONTROLS_ACTIONS.DOWN) && (pos >= LO.Count-1))
+                    {
+                      
+                        return;
+                    }
+
 
                     PluginInList tmp;
 
@@ -378,26 +384,9 @@ namespace ECPU.LoadOrderUtility
         private void act(object sender, MouseButtonEventArgs e)
         {
             changeLO((CONTROLS_ACTIONS)(sender as TextBlock).Tag);
-
-            //   CPWindow window = (CPWindow)Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
             allWindow.Children.RemoveAt(1);
             allWindow.Children.Add(buildContent());
-           // top = new TopArea();
-          //  content = new LO_MANAGER().buildContent();
-
         }
 
-    
-        /*
-        public override StackPanel getView()
-        {
-            view = new StackPanel();
-            view.Orientation = Orientation.Horizontal;
-            view.Children.Add(plugins);
-            view.Children.Add(controls);
-            return view;
-        }
-
-      */
     }
 }
