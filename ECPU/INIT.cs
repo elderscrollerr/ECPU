@@ -17,7 +17,7 @@ namespace ECPU
     {
         public struct APP { public string PATH; public string ARGS;}
 
-        public enum GAMES {MASS, OP, ESSE }
+        public enum GAMES {MASS, OP, MP, ESSE }
       
        
        
@@ -56,11 +56,13 @@ namespace ECPU
 
         public static void initUserBDGame()
         {
-     CTRL_PANEL_DIR = @"J:\Games\TES 5 Skyrim - ESSE\Control Panel\"; 
-          //  CTRL_PANEL_DIR = @"D:\OblivionPR\Control Panel\"; //корневая директория панели управления - временно
-       //  CTRL_PANEL_DIR = AppDomain.CurrentDomain.BaseDirectory;
+     CTRL_PANEL_DIR = @"J:\Games\TES 5 Skyrim - ESSE\Control Panel\";
+         //  CTRL_PANEL_DIR = @"D:\TES_DEV\!!!!!!!!!!!!!!!!!!MASS\Control Panel\"; // bumagi
+            //  CTRL_PANEL_DIR = @"D:\OblivionPR\Control Panel\"; //корневая директория панели управления - временно
+         //  CTRL_PANEL_DIR = AppDomain.CurrentDomain.BaseDirectory;
 
-          
+
+
 
             RES_DIR = CTRL_PANEL_DIR + @"Resources\"; //корневая директория ресурсов панели
             ENB_DIR = CTRL_PANEL_DIR + @"ENB\"; //корневая директория ENB-пресетов 
@@ -119,13 +121,28 @@ namespace ECPU
             {
                 if (File.Exists(GAME_ROOT + "Oblivion.exe"))
                 {
-                    CURRENT_GAME = GAMES.OP;
-                    USER_DB_FILE = RES_DIR + "OP.db";
-                    DB_CONNECTION_STRING = "Data Source=" + USER_DB_FILE;
-                    RUN_THROW_SCRIPT_EXTENDER = true;
-                    GAME_PROCESS_NAME = "Oblivion";
-                    MASTER_FILES_ESM = new string[1];
-                    MASTER_FILES_ESM[0] = "Oblivion.esm";
+                    if (File.Exists(GAME_ROOT + @"Data\Morrowind_ob.esm"))
+                    {
+                        CURRENT_GAME = GAMES.MP;
+                        USER_DB_FILE = RES_DIR + "MP.db";
+                        DB_CONNECTION_STRING = "Data Source=" + USER_DB_FILE;
+                        RUN_THROW_SCRIPT_EXTENDER = true;
+                        GAME_PROCESS_NAME = "Oblivion";
+                        MASTER_FILES_ESM = new string[1];
+                        MASTER_FILES_ESM[0] = "Morrowind_ob.esm";
+                    }
+                    else
+                    {
+                        CURRENT_GAME = GAMES.OP;
+                        USER_DB_FILE = RES_DIR + "OP.db";
+                        DB_CONNECTION_STRING = "Data Source=" + USER_DB_FILE;
+                        RUN_THROW_SCRIPT_EXTENDER = true;
+                        GAME_PROCESS_NAME = "Oblivion";
+                        MASTER_FILES_ESM = new string[1];
+                        MASTER_FILES_ESM[0] = "Oblivion.esm";
+                    }
+
+                   
                     
                 }
                 else

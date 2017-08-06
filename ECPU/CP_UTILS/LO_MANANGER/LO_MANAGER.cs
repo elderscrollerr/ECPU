@@ -102,7 +102,7 @@ namespace ECPU.LoadOrderUtility
 
 
 
-                        if (INIT.CURRENT_GAME.Equals(INIT.GAMES.OP) || (INIT.CURRENT_GAME.Equals(INIT.GAMES.ESSE) && line[0].CompareTo('*') == 0))
+                        if (INIT.CURRENT_GAME.Equals(INIT.GAMES.OP) || INIT.CURRENT_GAME.Equals(INIT.GAMES.MP) || (INIT.CURRENT_GAME.Equals(INIT.GAMES.ESSE) && line[0].CompareTo('*') == 0))
                         {
                             esp.activate();
                         }
@@ -144,7 +144,7 @@ namespace ECPU.LoadOrderUtility
         {
             ArrayList LOForWriteinFile = new ArrayList();
 
-            if (INIT.CURRENT_GAME.Equals(INIT.GAMES.OP))
+            if (INIT.CURRENT_GAME.Equals(INIT.GAMES.OP)|| INIT.CURRENT_GAME.Equals(INIT.GAMES.MP))
             {
                 LOForWriteinFile.Add("# This file is used to tell Oblivion which data files to load.");
                 LOForWriteinFile.Add(Environment.NewLine);

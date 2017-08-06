@@ -44,8 +44,14 @@ namespace ECPU
                             UPDATE_DB_DOWNLOAD_LINK = @"";
                         }else
                         {
+                        if (INIT.CURRENT_GAME.Equals(INIT.GAMES.MP))
+                        {
+                            UPDATE_DB_DOWNLOAD_LINK = @"";
+                        }else
+                        {
                             return;
                         }
+                    }
                     }
                 }
              

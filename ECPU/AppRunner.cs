@@ -72,7 +72,7 @@ namespace ECPU
                 }
                 
                 _process.EnableRaisingEvents = true;
-                if (INIT.CURRENT_GAME.Equals(INIT.GAMES.OP) && Path.GetFileNameWithoutExtension(apppath).Equals("obse_loader"))
+                if ((INIT.CURRENT_GAME.Equals(INIT.GAMES.OP) || INIT.CURRENT_GAME.Equals(INIT.GAMES.MP)) && Path.GetFileNameWithoutExtension(apppath).Equals("obse_loader"))
                 {
                     _process.Exited += new EventHandler(scriptExtenderExit);
                 }else
@@ -103,7 +103,7 @@ namespace ECPU
                 Application.Current.MainWindow.IsEnabled = false;
 
             }));
-            if (INIT.CURRENT_GAME.Equals(INIT.GAMES.OP))
+            if (INIT.CURRENT_GAME.Equals(INIT.GAMES.OP) || INIT.CURRENT_GAME.Equals(INIT.GAMES.MP))
             {
 
                 if (string.IsNullOrEmpty(argument))
@@ -156,7 +156,7 @@ namespace ECPU
           
 
 
-           if (INIT.CURRENT_GAME.Equals(INIT.GAMES.OP) && Convert.ToBoolean(im.getValueByKey("bDisableExplorer")) && string.IsNullOrEmpty(argument) && Path.GetFileNameWithoutExtension(apppath).Equals("obse_loader") )
+           if ((INIT.CURRENT_GAME.Equals(INIT.GAMES.OP) || INIT.CURRENT_GAME.Equals(INIT.GAMES.MP)) && Convert.ToBoolean(im.getValueByKey("bDisableExplorer")) && string.IsNullOrEmpty(argument) && Path.GetFileNameWithoutExtension(apppath).Equals("obse_loader") )
             {
                 foreach (Process process in Process.GetProcessesByName("explorer"))
                 {
