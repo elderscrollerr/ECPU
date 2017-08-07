@@ -72,7 +72,7 @@ namespace ECPU
                 }
                 
                 _process.EnableRaisingEvents = true;
-                if ((INIT.CURRENT_GAME.Equals(INIT.GAMES.OP) || INIT.CURRENT_GAME.Equals(INIT.GAMES.MP)) && Path.GetFileNameWithoutExtension(apppath).Equals("obse_loader"))
+                if (GAME_TYPE.runThrowOBSE && Path.GetFileNameWithoutExtension(apppath).Equals("obse_loader"))
                 {
                     _process.Exited += new EventHandler(scriptExtenderExit);
                 }else
@@ -103,39 +103,12 @@ namespace ECPU
                 Application.Current.MainWindow.IsEnabled = false;
 
             }));
-            if (INIT.CURRENT_GAME.Equals(INIT.GAMES.OP) || INIT.CURRENT_GAME.Equals(INIT.GAMES.MP))
+
+          
+            if (GAME_TYPE.needToSwitchDXFiles)
             {
 
-                if (string.IsNullOrEmpty(argument))
-                {
-
-                    if (File.Exists(INIT.GAME_ROOT + @"d3d9.bak"))
-                    {
-                        File.Move(INIT.GAME_ROOT + @"d3d9.bak", INIT.GAME_ROOT + @"d3d9.dll");
-
-                    }
-                    if (File.Exists(INIT.GAME_ROOT + @"Data\OBSE\Plugins\Construction Set Extender.dll"))
-                    {
-                        File.Move(INIT.GAME_ROOT + @"Data\OBSE\Plugins\Construction Set Extender.dll", INIT.GAME_ROOT + @"Data\OBSE\Plugins\Const.bak");
-                    }
-                    
-
-                  
-                }
-                else
-                {
-                    if (File.Exists(INIT.GAME_ROOT + @"d3d9.dll"))
-                    {
-                        File.Move(INIT.GAME_ROOT + @"d3d9.dll", INIT.GAME_ROOT + @"d3d9.bak");
-                    }
-
-                    if (File.Exists(INIT.GAME_ROOT + @"Data\OBSE\Plugins\Const.bak"))
-                    {
-                        File.Move(INIT.GAME_ROOT + @"Data\OBSE\Plugins\Const.bak", INIT.GAME_ROOT + @"Data\OBSE\Plugins\Construction Set Extender.dll");
-                    }
-                   
-                 
-                }
+                Utils.switchDXFilesForOblivionGames(argument);
             }
 
 
@@ -145,25 +118,20 @@ namespace ECPU
                 VirtualCDisMountedNow = true;
                 //монтируем
             }
-            IniManager im;
-            if (File.Exists(INIT.GAME_ROOT + @"ObivionPerfect.ini"))
+            if (GAME_TYPE.needToDisableExplorer)
             {
-                im = new IniManager(INIT.GAME_ROOT + @"ObivionPerfect.ini");
-            }else
-            {
-                im = null;
-            }
-          
-
-
-           if ((INIT.CURRENT_GAME.Equals(INIT.GAMES.OP) || INIT.CURRENT_GAME.Equals(INIT.GAMES.MP)) && Convert.ToBoolean(im.getValueByKey("bDisableExplorer")) && string.IsNullOrEmpty(argument) && Path.GetFileNameWithoutExtension(apppath).Equals("obse_loader") )
-            {
-                foreach (Process process in Process.GetProcessesByName("explorer"))
+                if (string.IsNullOrEmpty(argument) && Path.GetFileNameWithoutExtension(apppath).Equals("obse_loader"))
                 {
-                    process.KillExplorer();
+                    foreach (Process process in Process.GetProcessesByName("explorer"))
+                    {
+                        process.KillExplorer();
+                    }
+                    explorerisDisableNow = true;
                 }
-                explorerisDisableNow = true;
+                
             }
+
+           
             if (MusicPlayer.isPlaying())
             {
                 MusicPlayer.Stop();

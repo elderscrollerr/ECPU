@@ -18,7 +18,7 @@ namespace ECPU
     {
         public static string TEMP_DB_SQLITE_FILE;
         public static string TEMP_DB_CONNECTION_STRING;
-        public static string UPDATE_DB_DOWNLOAD_LINK;
+       
 
         public static float ACTUAL_GAME_VERSION;
         public static int ACTUAL_DB_VERSION;
@@ -27,37 +27,8 @@ namespace ECPU
 
         public UPDATER() : base("WINDOW_UPDATES")
         {
-            if (INIT.CURRENT_GAME.Equals(INIT.GAMES.ESSE))
-                {
-                    UPDATE_DB_DOWNLOAD_LINK = @"https://www.dropbox.com/s/295t2xi7mx3652v/ESSE.db?dl=1";
-                }else
-                {
-                    if (INIT.CURRENT_GAME.Equals(INIT.GAMES.OP))
-                    {
-                  UPDATE_DB_DOWNLOAD_LINK = @"https://www.dropbox.com/s/k6lsypai1kwztcz/CP.db?dl=1";
-                
-                }
-                    else
-                    {
-                        if (INIT.CURRENT_GAME.Equals(INIT.GAMES.MASS))
-                        {
-                            UPDATE_DB_DOWNLOAD_LINK = @"";
-                        }else
-                        {
-                        if (INIT.CURRENT_GAME.Equals(INIT.GAMES.MP))
-                        {
-                            UPDATE_DB_DOWNLOAD_LINK = @"";
-                        }else
-                        {
-                            return;
-                        }
-                    }
-                    }
-                }
-             
                 TEMP_DB_SQLITE_FILE = INIT.RES_DIR + "TEMP.db";
                 TEMP_DB_CONNECTION_STRING = "Data Source=" + TEMP_DB_SQLITE_FILE;
-
             try
             {
                 getnewBD();
@@ -66,7 +37,6 @@ namespace ECPU
             {
                 return;
             }
-
         }
   
 
@@ -74,7 +44,7 @@ namespace ECPU
         {
             try
             {
-                new WebClient().DownloadFile(UPDATE_DB_DOWNLOAD_LINK, TEMP_DB_SQLITE_FILE);
+                new WebClient().DownloadFile(GAME_TYPE.UPDATE_DB_DOWNLOAD_LINK, TEMP_DB_SQLITE_FILE);
             }
             catch
             {

@@ -17,13 +17,13 @@ namespace ECPU
     {
         public struct APP { public string PATH; public string ARGS;}
 
-        public enum GAMES {MASS, OP, MP, ESSE }
+       
       
        
        
 
         //Данные пользователя и пользовательской БД
-        public static GAMES CURRENT_GAME; //игра, под которой запущена панель
+       
         public static string CTRL_PANEL_DIR, RES_DIR, ENB_DIR, SHADER_DIR, ESP_SETTINGS_DIR; //корневая директория панели управления, ресурсов панели, esp и пресетов ENB
         public static string GAME_ROOT;//корневая папка игры
         public static string DATA_DIR;//папка Data игры
@@ -44,7 +44,6 @@ namespace ECPU
         public static bool RUN_THROW_SCRIPT_EXTENDER;// запускать ли игру через Script Extender
         public static int USER_BD_VERSION; // Версия базы у данных пользователя
         public static List<int> USER_UPDATES_INSTALLED; //Список номеров установленных обновлений (из базы пользователя)
-        public static bool DisableExplorer;
         public static bool DEFAULT_VISUAL_STYLE;
         public static string[] MASTER_FILES_ESM; // необходимые для игры мастер-файлы
         public static string CURRENT_SHIFTED_PLUGIN_IN_LO;
@@ -76,7 +75,7 @@ namespace ECPU
             INIT.CURRENT_SHIFTED_PLUGIN_IN_LO = "";
             LOG_FILE = CTRL_PANEL_DIR + "cp_log.txt";
 
-            detectAndSetGame();
+            GAME_TYPE.init(); 
 
             SQLiteManager userBDSQLManager = new SQLiteManager();
             setPathsAndFilesForCheck(userBDSQLManager);
@@ -103,72 +102,7 @@ namespace ECPU
         }
 
      
-        private static void detectAndSetGame()
-        {
-            
-
-            if (File.Exists(GAME_ROOT + "Morrowind.exe"))
-            {
-                CURRENT_GAME = GAMES.MASS;
-                USER_DB_FILE = RES_DIR + "MASS.db";
-                DB_CONNECTION_STRING = "Data Source=" + USER_DB_FILE;
-                GAME_ISO_MOUNT_PATH = CTRL_PANEL_DIR + "Morrowind.iso";
-                RUN_THROW_SCRIPT_EXTENDER = false;
-                GAME_PROCESS_NAME = "Morrowind";
-                MASTER_FILES_ESM = new string[3];
-            }
-            else
-            {
-                if (File.Exists(GAME_ROOT + "Oblivion.exe"))
-                {
-                    if (File.Exists(GAME_ROOT + @"Data\Morrowind_ob.esm"))
-                    {
-                        CURRENT_GAME = GAMES.MP;
-                        USER_DB_FILE = RES_DIR + "MP.db";
-                        DB_CONNECTION_STRING = "Data Source=" + USER_DB_FILE;
-                        RUN_THROW_SCRIPT_EXTENDER = true;
-                        GAME_PROCESS_NAME = "Oblivion";
-                        MASTER_FILES_ESM = new string[1];
-                        MASTER_FILES_ESM[0] = "Morrowind_ob.esm";
-                    }
-                    else
-                    {
-                        CURRENT_GAME = GAMES.OP;
-                        USER_DB_FILE = RES_DIR + "OP.db";
-                        DB_CONNECTION_STRING = "Data Source=" + USER_DB_FILE;
-                        RUN_THROW_SCRIPT_EXTENDER = true;
-                        GAME_PROCESS_NAME = "Oblivion";
-                        MASTER_FILES_ESM = new string[1];
-                        MASTER_FILES_ESM[0] = "Oblivion.esm";
-                    }
-
-                   
-                    
-                }
-                else
-                {
-                    if (File.Exists(GAME_ROOT + "SkyrimSE.exe"))
-                    {
-                        CURRENT_GAME = GAMES.ESSE;
-                        USER_DB_FILE = RES_DIR + "ESSE.db";
-                        DB_CONNECTION_STRING = "Data Source=" + USER_DB_FILE;
-                        RUN_THROW_SCRIPT_EXTENDER = false;
-                        GAME_PROCESS_NAME = "SkyrimSE";
-                        MASTER_FILES_ESM = new string[5];
-                        MASTER_FILES_ESM[0] = "Skyrim.esm";
-                        MASTER_FILES_ESM[1] = "Update.esm";
-                        MASTER_FILES_ESM[2] = "Dawnguard.esm";
-                        MASTER_FILES_ESM[3] = "HearthFires.esm";
-                        MASTER_FILES_ESM[4] = "Dragonborn.esm";
-                        
-                    }
-                    else
-                    {
-                        throw new GameTypeInitializationException();
-                    }
-                }
-            }
-        }
+   
 
         private static void setPathsAndFilesForCheck(SQLiteManager mngrs)
         {

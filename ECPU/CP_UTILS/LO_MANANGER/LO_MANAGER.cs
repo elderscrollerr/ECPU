@@ -17,6 +17,8 @@ namespace ECPU.LoadOrderUtility
 {
     public class LO_MANAGER : CPWindow
     {
+        
+
         public enum CONTROLS_ACTIONS { UP, DOWN, RESET };
    
         private static List<PluginInList> LO;
@@ -102,7 +104,7 @@ namespace ECPU.LoadOrderUtility
 
 
 
-                        if (INIT.CURRENT_GAME.Equals(INIT.GAMES.OP) || INIT.CURRENT_GAME.Equals(INIT.GAMES.MP) || (INIT.CURRENT_GAME.Equals(INIT.GAMES.ESSE) && line[0].CompareTo('*') == 0))
+                        if (!GAME_TYPE.activepluginsMarkAsterisk || line[0].CompareTo('*') == 0)
                         {
                             esp.activate();
                         }
@@ -144,7 +146,7 @@ namespace ECPU.LoadOrderUtility
         {
             ArrayList LOForWriteinFile = new ArrayList();
 
-            if (INIT.CURRENT_GAME.Equals(INIT.GAMES.OP)|| INIT.CURRENT_GAME.Equals(INIT.GAMES.MP))
+            if (!GAME_TYPE.activepluginsMarkAsterisk)
             {
                 LOForWriteinFile.Add("# This file is used to tell Oblivion which data files to load.");
                 LOForWriteinFile.Add(Environment.NewLine);
@@ -161,8 +163,6 @@ namespace ECPU.LoadOrderUtility
             }
             else
             {
-                if (INIT.CURRENT_GAME.Equals(INIT.GAMES.ESSE))
-                {
                     LOForWriteinFile.Add("# This file is used by Skyrim to keep track of your downloaded content.");
                     LOForWriteinFile.Add("# Please do not modify this file.");
 
@@ -182,7 +182,6 @@ namespace ECPU.LoadOrderUtility
                         }
 
                     }
-                }
             }
 
 

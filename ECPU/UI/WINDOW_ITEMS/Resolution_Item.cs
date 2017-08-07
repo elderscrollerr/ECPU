@@ -192,7 +192,7 @@ namespace ECPU.Settings
                 new IniManager(_iniFilepath).setParameter(keyHeight, (selected.Split('X')[1]).Trim(), _iniSection);
             }
 
-            if (INIT.CURRENT_GAME.Equals(INIT.GAMES.ESSE))
+            if (GAME_TYPE.resolutionItemChangeWithCopyUIFixes)
             {
               
                 string resolFixfile = INIT.RES_DIR + @"SkyUIFixesINI\" + (selected.Split('X')[0]).Trim() + "x" + (selected.Split('X')[1]).Trim() + @"\SkyrimCustom.ini";

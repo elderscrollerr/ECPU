@@ -77,6 +77,7 @@
     <Compile Include="CP_UTILS\ENB_MANAGER\ENB_MANAGER.cs" />
     <Compile Include="CP_UTILS\ENB_MANAGER\ENB_PRESET.cs" />
     <Compile Include="Downloader.cs" />
+    <Compile Include="GAME_TYPE.cs" />
     <Compile Include="INIT.cs" />
     <Compile Include="ExplorerHandler.cs" />
     <Compile Include="CP_UTILS\LO_MANANGER\LO_MANAGER.cs" />
