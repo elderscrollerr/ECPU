@@ -115,6 +115,7 @@ namespace ECPU
             mngr.setENBInDB(name);
 
             mngr.ConnectionClose();
+            INIT.CURRENT_ENB_OPTION = name;
             IsChecked = true;
             activeNow = true;
         }
