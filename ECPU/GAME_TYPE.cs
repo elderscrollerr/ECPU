@@ -11,10 +11,7 @@ namespace ECPU
   public static class GAME_TYPE
     {
         public enum GAMES { MASS, OP, MP, ESSE }
-        public static GAMES CURRENT_GAME; //игра, под которой запущена панель
-        public static bool needToSwitchDXFiles = false;
-        public static bool needToDisableExplorer = false;
-        public static bool runThrowOBSE = false;
+        public static GAMES CURRENT_GAME; //игра, под которой запущена панель     
         public static bool activepluginsMarkAsterisk = false;
         public static string UPDATE_DB_DOWNLOAD_LINK;
         public static bool resolutionItemChangeWithCopyUIFixes = false;
@@ -36,16 +33,8 @@ namespace ECPU
             {
                 if (File.Exists(INIT.GAME_ROOT + "Oblivion.exe"))
                 {
-                    runThrowOBSE = true;
-                    if (File.Exists(INIT.GAME_ROOT + @"ObivionPerfect.ini"))
-                    {
-                        IniManager im = new IniManager(INIT.GAME_ROOT + @"ObivionPerfect.ini");
-                      
-                        if (Convert.ToBoolean(im.getValueByKey("bDisableExplorer")))
-                        {
-                            needToDisableExplorer = true;
-                        }
-                    }
+                    
+                 
 
                     if (File.Exists(INIT.GAME_ROOT + @"Data\Morrowind_ob.esm"))
                     {
@@ -58,7 +47,7 @@ namespace ECPU
                         INIT.MASTER_FILES_ESM = new string[2];
                         INIT.MASTER_FILES_ESM[0] = "Oblivion.esm";
                         INIT.MASTER_FILES_ESM[1] = "Morrowind_ob.esm";
-                        needToSwitchDXFiles = true;
+                      
                     }
                     else
                     {
@@ -70,7 +59,7 @@ namespace ECPU
                         INIT.GAME_PROCESS_NAME = "Oblivion";
                         INIT.MASTER_FILES_ESM = new string[1];
                         INIT.MASTER_FILES_ESM[0] = "Oblivion.esm";
-                        needToSwitchDXFiles = true;
+                        
                     }
 
 

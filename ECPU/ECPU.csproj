@@ -77,6 +77,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OBSE_GAME_Runner.cs" />
+    <Compile Include="CSE_Runner.cs" />
     <Compile Include="AppRunner.cs" />
     <Compile Include="CP_UTILS\ENB_MANAGER\ENB_MANAGER.cs" />
     <Compile Include="CP_UTILS\ENB_MANAGER\ENB_PRESET.cs" />

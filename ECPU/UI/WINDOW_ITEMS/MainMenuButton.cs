@@ -31,6 +31,7 @@ namespace ECPU
         private Label button;
         private INIT.APP application;
         private string target;
+        private string typeOfApp;
 
         private static string musicPath = STYLE.MUSIC_FILE_PATH;
        
@@ -39,12 +40,13 @@ namespace ECPU
            
             type = _type;
             target = _target;
-
+            
             switch (type)
             {
                 case "APP":
                  //   MessageBox.Show(_name);
                     application.PATH = INIT.getpath(target);
+                    typeOfApp = _desc;
                     break;             
                 default:
                   target = _target;
@@ -95,9 +97,27 @@ namespace ECPU
             switch (type)
             {
                 case "APP":
-                    try { new AppRunner(application.PATH).runApp(); }
-                    catch { throw new ApplicationNotFoundException(Path.GetFileNameWithoutExtension(application.PATH)); } 
-                    break;
+                    switch (typeOfApp)
+                    {
+                        case "GAME":
+
+                            try { new AppRunner(application.PATH).runApp(); }
+                            catch { throw new ApplicationNotFoundException(Path.GetFileNameWithoutExtension(application.PATH)); }
+                            break;
+                        case "OBSE_GAME":
+
+                            try { new OBSE_GAME_Runner(application.PATH).runApp(); }
+                            catch { throw new ApplicationNotFoundException(Path.GetFileNameWithoutExtension(application.PATH)); }
+                            break;
+                        case "CSE":
+
+                            try { new CSE_Runner(application.PATH).runApp(); }
+                            catch { throw new ApplicationNotFoundException(Path.GetFileNameWithoutExtension(application.PATH)); }
+                            break;
+                        default:
+                            break;
+                    }
+                            break;
                 case "WINDOW":
                     new CPWindow(target).ShowDialog();
                     break;

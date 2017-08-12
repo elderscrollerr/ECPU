@@ -173,38 +173,7 @@ namespace ECPU
 
 
 
-        public static void switchDXFilesForOblivionGames(string argument) {
-            if (string.IsNullOrEmpty(argument))
-            {
-
-                if (File.Exists(INIT.GAME_ROOT + @"d3d9.bak"))
-                {
-                    File.Move(INIT.GAME_ROOT + @"d3d9.bak", INIT.GAME_ROOT + @"d3d9.dll");
-
-                }
-                if (File.Exists(INIT.GAME_ROOT + @"Data\OBSE\Plugins\Construction Set Extender.dll"))
-                {
-                    File.Move(INIT.GAME_ROOT + @"Data\OBSE\Plugins\Construction Set Extender.dll", INIT.GAME_ROOT + @"Data\OBSE\Plugins\Const.bak");
-                }
-
-
-
-            }
-            else
-            {
-                if (File.Exists(INIT.GAME_ROOT + @"d3d9.dll"))
-                {
-                    File.Move(INIT.GAME_ROOT + @"d3d9.dll", INIT.GAME_ROOT + @"d3d9.bak");
-                }
-
-                if (File.Exists(INIT.GAME_ROOT + @"Data\OBSE\Plugins\Const.bak"))
-                {
-                    File.Move(INIT.GAME_ROOT + @"Data\OBSE\Plugins\Const.bak", INIT.GAME_ROOT + @"Data\OBSE\Plugins\Construction Set Extender.dll");
-                }
-
-
-            }
-        }
+       
 
 
         public static void checkNETFrameworkVersion()

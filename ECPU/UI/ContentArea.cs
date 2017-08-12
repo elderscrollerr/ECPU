@@ -138,7 +138,7 @@ namespace ECPU.UI
                            row[2].ToString(),
                            Convert.ToInt32(row[6]),
                           row[3].ToString(),// "APP",
-                           row[4].ToString());
+                          row[4].ToString());
                         items.Add(item);
                         break;
                     case "WINDOW":
