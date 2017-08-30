@@ -34,11 +34,15 @@ namespace ECPU
             
             if (connection != null && connection.State != ConnectionState.Closed)
             {
-                connection.Close();              
-                GC.Collect();              
+              
+                connection.Close();
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
             }
           
         }
+
+       
         public DataTable getListItems(string table)
         {
 

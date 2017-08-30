@@ -22,26 +22,22 @@ namespace ECPU
 
         public static float ACTUAL_GAME_VERSION;
         public static int ACTUAL_DB_VERSION;
-       
+    
 
 
         public UPDATER() : base("WINDOW_UPDATES")
         {
-                TEMP_DB_SQLITE_FILE = INIT.RES_DIR + "TEMP.db";
-                TEMP_DB_CONNECTION_STRING = "Data Source=" + TEMP_DB_SQLITE_FILE;
-            try
-            {
-                getnewBD();
-            }
-            catch (NoInternetConnectionException)
-            {
-                return;
-            }
         }
   
 
-        public void getnewBD()
+        public static void getnewBD()
         {
+            if (File.Exists(TEMP_DB_SQLITE_FILE))
+            {
+                FileManager.remove(TEMP_DB_SQLITE_FILE);
+            }
+
+
             try
             {
                 new WebClient().DownloadFile(GAME_TYPE.UPDATE_DB_DOWNLOAD_LINK, TEMP_DB_SQLITE_FILE);
@@ -81,8 +77,10 @@ namespace ECPU
         {
             MessageBox.Show("Есть новая версия базы данных панели." + Environment.NewLine + "Будет произведено обновление с версии " + INIT.USER_BD_VERSION + " до версии " + ACTUAL_DB_VERSION);
             Thread.Sleep(500);
-            FileManager.MoveWithReplace(TEMP_DB_SQLITE_FILE, INIT.USER_DB_FILE);
-
+            System.Data.SQLite.SQLiteConnection.ClearAllPools();
+           FileManager.MoveWithReplace(TEMP_DB_SQLITE_FILE, INIT.USER_DB_FILE);
+        //  MessageBox.Show(TEMP_DB_SQLITE_FILE + "  " + INIT.USER_DB_FILE);
+            Thread.Sleep(500);
             SQLiteManager userDatarestore = new SQLiteManager();
           userDatarestore.setENBInDB(INIT.CURRENT_ENB_OPTION);
             userDatarestore.setShaderInDB(INIT.CURRENT_SHADER_OPTION);
@@ -95,11 +93,12 @@ namespace ECPU
                 userupd.ConnectionClose();
             }
 
-            MessageBox.Show("Обновление прошло успешно");
+            MessageBox.Show("Обновление базы данных прошло успешно");
             Logger.addLine(true, "Обновление БД панели с версии " + INIT.USER_BD_VERSION + " до версии " + ACTUAL_DB_VERSION);
             INIT.USER_BD_VERSION = ACTUAL_DB_VERSION;
-           
-           
+        
+
+
         }
 
     }

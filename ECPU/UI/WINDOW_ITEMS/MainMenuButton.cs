@@ -142,15 +142,24 @@ namespace ECPU
                         case "UPDATER":
                             try
                             {
-                                new UPDATER().ShowDialog();
+                                UPDATER.TEMP_DB_SQLITE_FILE = INIT.RES_DIR + "TEMP.db";
+                                UPDATER.TEMP_DB_CONNECTION_STRING = "Data Source=" + UPDATER.TEMP_DB_SQLITE_FILE;
+                                UPDATER.getnewBD();
                             }
-                               catch (gameBuildInvalidVersionForUpdateException ex)
+                            catch (NoInternetConnectionException)
+                            {
+                                return;
+                            }
+
+                            try
+                            {
+                               new UPDATER().ShowDialog();
+                            }
+                            catch (gameBuildInvalidVersionForUpdateException ex)
                             {
                                 MessageBox.Show(ex.Message);
                                 return;
                             }
-                           
-                            
                             break;
                         default:
                             break;

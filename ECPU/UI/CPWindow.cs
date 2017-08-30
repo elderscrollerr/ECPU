@@ -66,7 +66,7 @@ namespace ECPU.UI
 
 
 
-        private void setContent()
+        protected void setContent()
         {
             BorderThickness = new Thickness(2);
             Width = content.Width;

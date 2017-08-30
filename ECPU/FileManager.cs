@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -224,9 +225,8 @@ namespace ECPU
             {
                 File.Delete(destFileName);
             }
-
+            GC.Collect();
             File.Move(sourceFileName, destFileName);
-
             if (File.Exists(sourceFileName))
             {
                 File.Delete(sourceFileName);
