@@ -56,12 +56,12 @@ namespace ECPU
 
         public static void initUserBDGame()
         {
-            //  CTRL_PANEL_DIR = @"J:\Games\TES 5 Skyrim - ESSE 0.6\Control Panel\";
+            // CTRL_PANEL_DIR = @"J:\Games\TES 5 Skyrim - ESSE 0.6\Control Panel\";
             //  CTRL_PANEL_DIR = @"D:\TES_DEV\!!!!!!!!!!!!!!!!!!MASS\Control Panel\"; // bumagi
             //  CTRL_PANEL_DIR = @"D:\OblivionPR\Control Panel\"; //корневая директория панели управления - временно
             //   CTRL_PANEL_DIR = AppDomain.CurrentDomain.BaseDirectory;
-            CTRL_PANEL_DIR = Directory.GetParent(Assembly.GetExecutingAssembly().Location) + @"\";
-          //  MessageBox.Show(CTRL_PANEL_DIR);
+           CTRL_PANEL_DIR = Directory.GetParent(Assembly.GetExecutingAssembly().Location) + @"\";
+         
 
 
             RES_DIR = CTRL_PANEL_DIR + @"Resources\"; //корневая директория ресурсов панели

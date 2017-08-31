@@ -34,19 +34,26 @@ namespace ECPU.LoadOrderUtility
         {
             currentActivePlugins = INIT.MASTER_FILES_ESM.Length;
             buildLO();
+            ScrollViewer scrolling_list = new ScrollViewer();
+            scrolling_list.Height = 400;
+            scrolling_list.VerticalScrollBarVisibility = ScrollBarVisibility.Auto;
             StackPanel list = getList();
+            scrolling_list.Content = list;
             StackPanel controls = getControls();
             Grid content = new ContentArea();
             content.RowDefinitions.Add(new RowDefinition());
             content.ColumnDefinitions.Add(new ColumnDefinition());
             content.ColumnDefinitions.Add(new ColumnDefinition());
-            content.Children.Add(list);
-            Grid.SetRow(list, 0);
-            Grid.SetColumn(list, 0);
-           content.Children.Add(controls);
-           Grid.SetRow(controls, 0);
+
+            content.Children.Add(scrolling_list);
+            Grid.SetRow(scrolling_list, 0);
+            Grid.SetColumn(scrolling_list, 0);
+
+            content.Children.Add(controls);
+            Grid.SetRow(controls, 0);
            Grid.SetColumn(controls, 1);
           
+
             return content;
           
         }

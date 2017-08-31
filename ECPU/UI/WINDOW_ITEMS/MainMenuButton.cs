@@ -115,6 +115,8 @@ namespace ECPU
                             catch { throw new ApplicationNotFoundException(Path.GetFileNameWithoutExtension(application.PATH)); }
                             break;
                         default:
+                            try { new AppRunner(application.PATH).runApp(); }
+                            catch { throw new ApplicationNotFoundException(Path.GetFileNameWithoutExtension(application.PATH)); }
                             break;
                     }
                             break;

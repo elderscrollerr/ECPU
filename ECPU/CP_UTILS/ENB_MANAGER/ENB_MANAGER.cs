@@ -81,14 +81,16 @@ namespace ECPU
 
             Grid enbGrid = new Grid();         
             enbGrid.ColumnDefinitions.Add(new ColumnDefinition());
-
+           
             if (!INIT.DEFAULT_VISUAL_STYLE)
             {
                 enbGrid.Background = new ImageBrush(STYLE.BUTTON);
+               // myScrollViewer.Foreground = STYLE.MAIN_MENU_FOREGROUND;
             }
             else
             {
                 enbGrid.Background = Brushes.WhiteSmoke;
+               // myScrollViewer.Foreground = Brushes.Black;
             }           
            
             enbGrid.Margin = new Thickness(15);
@@ -104,6 +106,13 @@ namespace ECPU
                 Grid.SetRow(sp, i);
                 Grid.SetColumn(sp, 0);
             }
+           
+           // Grid enbGrid2 = new Grid();
+         //   myScrollViewer.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
+          //  myScrollViewer.Height = 400;
+           // enbGrid2.Children.Add(myScrollViewer);
+           // Grid.SetRow(myScrollViewer, 0);
+           // Grid.SetColumn(myScrollViewer, 0);
             if (activePreset==null)
             {
                 noPreset.enable();

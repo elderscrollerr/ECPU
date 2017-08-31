@@ -30,8 +30,8 @@ namespace ECPU.UI
 
 
             top = new TopArea();
-            content = buildContent();
-
+            content = new Grid();
+            content.Children.Add(buildContent());
 
             setContent();
 
