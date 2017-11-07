@@ -21,7 +21,7 @@ namespace ECPU.Settings
             _optionOffBSA = optionOffBSA;
 
             //_bsa = bsa;
-            currentBSAFilesInINI = new IniManager(_iniFilepath).getValueByKey(_iniKey).Split(',').ToList<string>();
+            currentBSAFilesInINI = new IniManager(_iniFilepath).getValueByKey(_iniKey, _iniSection).Split(',').ToList<string>();
             for (int i = 0; i < currentBSAFilesInINI.ToArray().Length; i++)
             {
                 currentBSAFilesInINI[i] = currentBSAFilesInINI[i].Trim();

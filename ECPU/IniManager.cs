@@ -87,19 +87,26 @@ namespace ECPU
             return existence;
         }
 
-        public string getValueByKey(string key)
+        public string getValueByKey(string key, string section)
         {
 
-
+            if (allLines==null)
+            {
+                MessageBox.Show("dasdas");
+            }
+          
+     //       MessageBox
             foreach (IniLineEntity element in allLines)
             {
+
+             //  MessageBox.Show(element.print());
                 if (element.isSection())
                 {
                     continue;
                 }
                 else
                 {
-                    if (element.getKey().Equals(key))
+                    if (element.getKey().Equals(key) && element.getNameOfSection().Equals(section))
                     {
                         return element.getValue();
                     }
@@ -168,7 +175,8 @@ namespace ECPU
             {
                 if (isKeyExist(key))
                 {
-                    allLines.Find(x => x.getKey() == key).setNewValue(value);
+                  //  x => (x.Body.Scopes.Count > 5) && (x.Foo == "test")
+                    allLines.Find( x => x.getKey() == key && x.getNameOfSection() == section).setNewValue(value);
                 }
                 else
                 {

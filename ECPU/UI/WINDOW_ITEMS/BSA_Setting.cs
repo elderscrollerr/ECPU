@@ -21,7 +21,7 @@ namespace ECPU.Settings
         public BSA_Setting(string name, string text, string desc, int position, string iniFilepath, string iniSection, string iniKey, string bsa) : base(name, text, desc, position, null, iniFilepath, iniSection, iniKey)
         {
             _bsa = bsa;
-            currentBSAFilesInINI = new IniManager(_iniFilepath).getValueByKey(_iniKey).Split(',').ToList<string>();
+            currentBSAFilesInINI = new IniManager(_iniFilepath).getValueByKey(_iniKey, _iniSection).Split(',').ToList<string>();
             for (int i = 0; i < currentBSAFilesInINI.ToArray().Length; i++)
             {
                 currentBSAFilesInINI[i] = currentBSAFilesInINI[i].Trim();

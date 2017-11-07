@@ -84,7 +84,7 @@ namespace ECPU
             {
                 IniManager im = new IniManager(INIT.GAME_ROOT + @"ObivionPerfect.ini");
 
-                if (Convert.ToBoolean(im.getValueByKey("bDisableExplorer")))
+                if (Convert.ToBoolean(im.getValueByKey("bDisableExplorer", "[GBR]")))
                 {
                     explorerisDisableNow = true;
                 }

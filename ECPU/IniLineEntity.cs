@@ -13,17 +13,25 @@ namespace ECPU
         private string sectionName;
         private string key;
         private string value;
-
+     
+      private static string currentSectionName;
 
         public IniLineEntity(string line)
         {
             string nameOfSection = IniParser.getNameOfSection(line);
 
-
+             
 
             if (String.IsNullOrEmpty(nameOfSection)) //создаем строку с параметром
             {
-
+                if (!String.IsNullOrEmpty(currentSectionName))
+                {
+                    sectionName = currentSectionName;
+                }else
+                {
+                    sectionName = "[NULL]";
+                }
+                
                 int count = 0;
                 for (int i = 0; i < line.Length; i++)
                 {
@@ -64,19 +72,17 @@ namespace ECPU
                     }
                 }
 
-
-                //    MessageBox.Show(value);  
-
+                sectionName = currentSectionName;
 
 
             }
             else //создаем секцию
             {
-
+              
                 sectionNumber++;
                 this.sectionName = nameOfSection;
                 this.section = true;
-
+               currentSectionName = sectionName;
 
             }
 
@@ -116,10 +122,7 @@ namespace ECPU
 
         }
 
-        public int getSectionNumber()
-        {
-            return sectionNumber;
-        }
+     
 
         public string getNameOfSection()
         {

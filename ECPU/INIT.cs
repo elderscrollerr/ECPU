@@ -60,7 +60,7 @@ namespace ECPU
             //  CTRL_PANEL_DIR = @"D:\TES_DEV\!!!!!!!!!!!!!!!!!!MASS\Control Panel\"; // bumagi
             //  CTRL_PANEL_DIR = @"D:\OblivionPR\Control Panel\"; //корневая директория панели управления - временно
             //   CTRL_PANEL_DIR = AppDomain.CurrentDomain.BaseDirectory;
-           CTRL_PANEL_DIR = Directory.GetParent(Assembly.GetExecutingAssembly().Location) + @"\";
+          CTRL_PANEL_DIR = Directory.GetParent(Assembly.GetExecutingAssembly().Location) + @"\";
          
 
 

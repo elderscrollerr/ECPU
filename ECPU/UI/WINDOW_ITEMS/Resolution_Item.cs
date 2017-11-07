@@ -37,8 +37,8 @@ namespace ECPU.Settings
 
             
             currentResolutionInINIFile = new int[2] {
-             Convert.ToInt32(new IniManager(_iniFilepath).getValueByKey(keyWidth)),
-             Convert.ToInt32(new IniManager(_iniFilepath).getValueByKey(keyHeight)),
+             Convert.ToInt32(new IniManager(_iniFilepath).getValueByKey(keyWidth, _iniSection)),
+             Convert.ToInt32(new IniManager(_iniFilepath).getValueByKey(keyHeight, _iniSection)),
         };
 
             if (currentWindowsResolution[0] == currentResolutionInINIFile[0] && currentWindowsResolution[1] == currentResolutionInINIFile[1])

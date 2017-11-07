@@ -56,7 +56,8 @@ namespace ECPU
 
                 }
             }
-                _currentValue = _iniManager.getValueByKey(iniKey);
+                _currentValue = "";
+                _currentValue = _iniManager.getValueByKey(iniKey, iniSection);
             }
            
         }
